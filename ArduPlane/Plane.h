@@ -112,6 +112,8 @@
 #endif
 #include "AP_Arming.h"
 
+#include "Asteria/AP_Asteria.h"
+
 /*
   main APM:Plane class
  */
@@ -160,6 +162,8 @@ public:
     friend class ModeTakeoff;
     friend class ModeThermal;
     friend class ModeLoiterAltQLand;
+
+    friend class AP_Asteria;
 
     Plane(void);
 
@@ -283,7 +287,10 @@ private:
 #if HAL_SOARING_ENABLED
     ModeThermal mode_thermal;
 #endif
-
+    /*Start: Asteria Code Change*/
+    AP_Asteria asteria;
+    /*End: Asteria code change*/
+    
     // This is the state of the flight control system
     // There are multiple states defined such as MANUAL, FBW-A, AUTO
     Mode *control_mode = &mode_initializing;

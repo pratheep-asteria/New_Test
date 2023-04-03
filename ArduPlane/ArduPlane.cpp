@@ -347,6 +347,7 @@ void Plane::one_second_loop()
         !is_equal(G_Dt, scheduler.get_loop_period_s())) {
         INTERNAL_ERROR(AP_InternalError::error_t::flow_of_control);
     }
+        asteria.gcs_test();
 }
 
 void Plane::three_hz_loop()
