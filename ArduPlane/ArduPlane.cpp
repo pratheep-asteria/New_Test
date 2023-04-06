@@ -134,6 +134,7 @@ const AP_Scheduler::Task Plane::scheduler_tasks[] = {
 #if LANDING_GEAR_ENABLED == ENABLED
     SCHED_TASK(landing_gear_update, 5, 50, 159),
 #endif
+    SCHED_TASK(asteria_hz_loop, 100, 120, 160),/// Asteria Code for new 100Hz loop function.
 };
 
 void Plane::get_scheduler_tasks(const AP_Scheduler::Task *&tasks,
@@ -347,7 +348,6 @@ void Plane::one_second_loop()
         !is_equal(G_Dt, scheduler.get_loop_period_s())) {
         INTERNAL_ERROR(AP_InternalError::error_t::flow_of_control);
     }
-        asteria.gcs_test();
 }
 
 void Plane::three_hz_loop()
@@ -825,5 +825,11 @@ void Plane::update_current_loc(void)
     ahrs.get_relative_position_D_home(plane.relative_altitude);
     relative_altitude *= -1.0f;
 }
+/*Start: Asteria Code Change*/
+void Plane::asteria_hz_loop()
+{
+    asteria.led_status();
+}
+/*End: Asteria Code Change*/
 
 AP_HAL_MAIN_CALLBACKS(&plane);

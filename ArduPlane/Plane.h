@@ -1220,6 +1220,10 @@ private:
     // last target alt we passed to tecs
     int32_t tecs_target_alt_cm;
 
+    /*Start: Asteria Code change*/
+    void asteria_hz_loop();
+    /*End: Asteria Code change*/
+
 public:
     void failsafe_check(void);
 #if AP_SCRIPTING_ENABLED

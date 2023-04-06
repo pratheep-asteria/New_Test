@@ -352,6 +352,10 @@ public:
         k_param_gcs6,          // stream rates
         k_param_fence,         // vehicle fence - unused
         k_param_acro_yaw_rate,
+
+        /*Start: Asteria Code Change*/
+        k_param_aled_enable = 300,
+         /*End: Asteria Code Change*/
     };
 
     AP_Int16 format_version;
@@ -463,6 +467,11 @@ public:
     AP_Int8 override_channel;
 #endif
     AP_Int16 gcs_pid_mask;
+
+/*Start: Asteria Code Change*/
+    AP_Int8 aled_enable;
+/*End: Asteria Code Change*/
+
 };
 
 /*
