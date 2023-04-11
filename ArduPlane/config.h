@@ -278,14 +278,3 @@
 #ifndef THR_CTRL_LAND_THRESH
  #define THR_CTRL_LAND_THRESH 0.7
 #endif
-
-
-/*Start: Asteria Code Change*/
-/////////////////////////////////////////////////////////////////////////////
-//  Asteria Defaults
-
-#ifndef LED_ENABLE_DEFAULT
- #define LED_ENABLE_DEFAULT 1
-#endif
-
-/*End: Asteria Code Change*/

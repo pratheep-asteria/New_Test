@@ -1,7 +1,7 @@
 /**
  * @file AP_Asteria.cpp
  * @author Rohith R M
- * This file contains Asteria added feature of RTL battery consumption estimation and distance based battery failsafe.
+ * This file contains Asteria added features for ARTY-5 Centaur Requirements.
  */
 
 #include "../Plane.h"
@@ -9,25 +9,25 @@
 #include "AP_Asteria.h"
 
 /** 
- * @brief This function runs the LED patterns
- * @details This function executes the led blink patterns for CENTAUR ARTY-5 Air vehicle
+ * @brief This function implements the LED patterns.
+ * @details This function executes the led blink patterns for CENTAUR ARTY-5 Air vehicle.
  * @return None
  */
 void AP_Asteria::led_status()
 {
 
-    ///Storing the LED_ENABLE parameter in a private variable
+    ///Store the LED_ENABLE parameter in the led_enable variable.
     led_enable = plane.g.aled_enable;
 
-    ///Setting AUX PWM1(50) and PWM2(52) pinmode to output 
+    ///Set AUX PWM1(50) and PWM2(52) pinmode to gpio output 
     hal.gpio->pinMode(LED_STARBOARD, HAL_GPIO_OUTPUT);
     hal.gpio->pinMode(LED_PORT, HAL_GPIO_OUTPUT);
-
+ 
     if(led_enable > 0)
     {
-        
+        power_on_flag=true;
         ///Radio Failsafe Condition, Double flash with 2 second delay
-        if(plane.failsafe.rc_failsafe && led_enable == 2)
+        if(plane.failsafe.rc_failsafe)
             {
                 if((AP_HAL::millis() - timer_2sec) > 1999)
                 {
@@ -52,7 +52,7 @@ void AP_Asteria::led_status()
             }
 
         /// Battery Failsafe condition, triple flash with 2 second delay
-        else if(plane.battery.has_failsafed() || led_enable == 3)
+        else if(plane.battery.has_failsafed())
             {
                 if((AP_HAL::millis() - timer_2sec) > 1999)
                 {
@@ -82,7 +82,14 @@ void AP_Asteria::led_status()
                 hal.gpio->write(LED_PORT,1);
             }
     }
+    else{power_on_flag=false;}
 
+    ///set all leds low if LED_ENABLE parameter is changed to 0 while operation.
+    if (!power_on_flag)
+    {
+        hal.gpio->write(LED_STARBOARD,0);
+        hal.gpio->write(LED_PORT,0);
+    }
 
     return;
 }

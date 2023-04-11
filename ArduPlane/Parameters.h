@@ -354,7 +354,7 @@ public:
         k_param_acro_yaw_rate,
 
         /*Start: Asteria Code Change*/
-        k_param_aled_enable = 300,
+        k_param_aled_enable = 400,
          /*End: Asteria Code Change*/
     };
 

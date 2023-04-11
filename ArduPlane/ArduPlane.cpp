@@ -134,7 +134,9 @@ const AP_Scheduler::Task Plane::scheduler_tasks[] = {
 #if LANDING_GEAR_ENABLED == ENABLED
     SCHED_TASK(landing_gear_update, 5, 50, 159),
 #endif
+/*Start: Asteria code change*/
     SCHED_TASK(asteria_hz_loop, 100, 120, 160),/// Asteria Code for new 100Hz loop function.
+/*End: Asteria code change*/
 };
 
 void Plane::get_scheduler_tasks(const AP_Scheduler::Task *&tasks,
@@ -826,7 +828,7 @@ void Plane::update_current_loc(void)
     relative_altitude *= -1.0f;
 }
 /*Start: Asteria Code Change*/
-void Plane::asteria_hz_loop()
+void Plane::asteria_hz_loop() /// Running currently at 100Hz
 {
     asteria.led_status();
 }

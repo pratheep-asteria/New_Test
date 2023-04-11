@@ -8,10 +8,13 @@
 #include "../Plane.h"
 #include <AP_Param/AP_Param.h>
 
-/// @brief Definitions
-#define LED_STARBOARD 50
-#define LED_PORT 51
+/// @brief Constants Definition
+#define LED_STARBOARD 50 ///< AUX PWM PORT 1
+#define LED_PORT 51 ///< AUX PWM PORT 2
 
+#ifndef LED_ENABLE_DEFAULT
+ #define LED_ENABLE_DEFAULT 1
+#endif
 
 class AP_Asteria
 {
@@ -19,7 +22,8 @@ class AP_Asteria
     public:
         AP_Asteria()
         {
-            /// Variables for LED Pattern
+            /// LED Pattern Initialisation
+            power_on_flag=false;
             led_enable = 0;
             led_starboard = 0;
             led_port = 0;
@@ -33,9 +37,10 @@ class AP_Asteria
 
     private:
 
-    /// @brief Private Variables
+    /// @brief Variable Definition
 
-    /// Private variables for LED pattern
+    /// variables for LED pattern
+    bool power_on_flag;///< flah variable to poer off led if LED_ENABLE is set to 0 during operations
     uint8_t led_enable; ///< Stores the led toggle value.
     uint8_t led_starboard;///< Starboard led AUX pin.
     uint8_t led_port;///< Port LED AUX pin.
