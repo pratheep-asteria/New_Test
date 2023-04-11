@@ -40,7 +40,7 @@ class AP_Asteria
     /// @brief Variable Definition
 
     /// variables for LED pattern
-    bool power_on_flag;///< flah variable to poer off led if LED_ENABLE is set to 0 during operations
+    bool power_on_flag;///< flag variable to power off led if LED_ENABLE is set to 0 during operations
     uint8_t led_enable; ///< Stores the led toggle value.
     uint8_t led_starboard;///< Starboard led AUX pin.
     uint8_t led_port;///< Port LED AUX pin.
