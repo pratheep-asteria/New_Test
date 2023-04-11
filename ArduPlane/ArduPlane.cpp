@@ -135,7 +135,7 @@ const AP_Scheduler::Task Plane::scheduler_tasks[] = {
     SCHED_TASK(landing_gear_update, 5, 50, 159),
 #endif
 /*Start: Asteria code change*/
-    SCHED_TASK(asteria_hz_loop, 100, 120, 160),/// Asteria Code for new 100Hz loop function.
+    SCHED_TASK(asteria_hz_loop, 10, 200, 160),/// Asteria Code for new 100Hz loop function.
 /*End: Asteria code change*/
 };
 

@@ -51,20 +51,28 @@ void AP_Asteria::led_status()
                 return;
             }
 
-        /// Battery Failsafe condition, triple flash with 2 second delay
+        /// Battery Failsafe condition, Alternating Double Flash.
         else if(plane.battery.has_failsafed())
             {
                 if((AP_HAL::millis() - timer_2sec) > 1999)
                 {
                     if((AP_HAL::millis() - timer_40ms) > 99)
                     {
-                        hal.gpio->toggle(LED_STARBOARD);
-                        hal.gpio->toggle(LED_PORT);
+                        if(step_flag < 4)
+                        {
+                            hal.gpio->toggle(LED_STARBOARD);
+                        }
+                        else
+                        {
+                            hal.gpio->write(LED_STARBOARD,0);
+                            hal.gpio->toggle(LED_PORT);
+
+                        }                        
                         step_flag +=1;
                         timer_40ms = AP_HAL::millis();
                     }
 
-                    if(step_flag >= 6)
+                    if(step_flag >= 8)
                     {   
                         hal.gpio->write(LED_STARBOARD,0);
                         hal.gpio->write(LED_PORT,0);

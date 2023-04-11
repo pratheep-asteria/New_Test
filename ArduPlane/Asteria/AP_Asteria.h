@@ -12,8 +12,8 @@
 #define LED_STARBOARD 50 ///< AUX PWM PORT 1
 #define LED_PORT 51 ///< AUX PWM PORT 2
 
-#ifndef LED_ENABLE_DEFAULT
- #define LED_ENABLE_DEFAULT 1
+#ifndef LED_ENABLE_DEFAULT 
+ #define LED_ENABLE_DEFAULT 1 ///< LED ENABLE default value
 #endif
 
 class AP_Asteria
