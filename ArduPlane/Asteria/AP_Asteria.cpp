@@ -19,6 +19,19 @@ void AP_Asteria::led_status()
     ///Store the LED_ENABLE parameter in the led_enable variable.
     led_enable = plane.g.aled_enable;
 
+     /// return if LED_ENABLE parameter is disabled.
+     if(led_enable == 0)
+     {
+         ///set all leds low if LED_ENABLE parameter is changed to 0 while operation.
+         if (power_on_flag==true)
+         {
+         hal.gpio->write(LED_STARBOARD,0);
+         hal.gpio->write(LED_PORT,0);
+         power_on_flag=false;
+         }
+     return;
+     }
+
     ///Set AUX PWM1(50) and PWM2(52) pinmode to gpio output 
     hal.gpio->pinMode(LED_STARBOARD, HAL_GPIO_OUTPUT);
     hal.gpio->pinMode(LED_PORT, HAL_GPIO_OUTPUT);
